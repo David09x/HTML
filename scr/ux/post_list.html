@@ -1,0 +1,84 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+
+<!-------------------------------------------------------->
+<script src="logicaFake.js"></script>
+<!-------------------------------------------------------->
+
+<script>
+function obtenerMediciones() {
+
+  var hora = document.getElementById("hora").value
+
+  // llamo a la función de la lógica (versión fake)
+  obtenerMedicion( hora, function( err, res ) {
+    // cuando tenga el resultado lo muestro
+    if ( err ) {
+
+      alert( " hubo un error de transmisión http: " + err )
+      return
+
+    } else if ( res.error ) {
+      alert( " hubo un error en la llamada: " + JSON.stringify( res.error ) )
+      return
+    }
+
+    document.getElementById("salida").innerHTML  =  "   resultado=  "  + JSON.stringify( res );
+  })
+
+}
+
+</script>
+
+<script>
+function obtenerTodasMediciones(){
+
+
+
+  // llamo a la función de la lógica (versión fake)
+      obtenerValores(function( err, res ) {
+    // cuando tenga el resultado lo muestro
+    if ( err ) {
+
+      alert( " hubo un error de transmisión http: " + err )
+      return
+
+    } else if ( res.error ) {
+      alert( " hubo un error en la llamada: " + JSON.stringify( res.error ) )
+      return
+    }
+
+    document.getElementById("salida3").innerHTML  =  "   resultado=  "  + JSON.stringify( res );
+
+    console.log(res)
+  })
+
+
+}
+</script>
+<body>
+  <h1>Pagina web para las medidas</h1>
+<label for="medidas">Medidas</label>
+<input type="text" id="hora" name="name1" required
+       minlength="4" maxlength="8" size="10">
+
+<button id= "medicionObtenida" onclick="obtenerMediciones()">Obtener</button>
+    <br>
+    <br>
+    <br>
+       <p id="salida">Antes</p>
+       <br>
+       <br>
+       <br>
+       <label for="medidasUlt24">Medidas ultimas 24 horas</label>
+       <br>
+       <br>
+       <br>
+       <button id="medicionObtenida2" onclick="obtenerTodasMediciones()">ObteneTodasr</button>
+       <br>
+       <br>
+       <br>
+       <p id="salida3">Antes</p>
+</body>
+</html>
